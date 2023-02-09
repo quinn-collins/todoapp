@@ -1,7 +1,13 @@
 package main
 
-import "fmt"
+import "net/http"
+
+func home(w http.ResponseWriter, r *http.Request) {
+  w.Write([]byte("Hello"))
+}
 
 func main() {
-  fmt.Println("Hello")
+  mux := http.NewServeMux()
+  mux.HandleFunc("/", home)
+  http.ListenAndServe(":4000", mux)
 }
