@@ -1,0 +1,18 @@
+{{define "base"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{template "title" .}} - TodoApp</title>
+</head>
+<body>
+  <header>
+    <h1><a href="/">TodoApp</a></h1>
+  </header>
+  <main>
+    {{template "main" .}}
+  </main>
+  <footer></footer>
+</body>
+</html>
+{{end}}
