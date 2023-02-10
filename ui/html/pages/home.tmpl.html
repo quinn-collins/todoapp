@@ -1,4 +1,17 @@
 {{define "title"}}Home{{end}}
 {{define "main"}}
 <h2>Todos</h2>
+<form action="/todo/add" method="POST">
+  <div>
+    <label>Todo</label>
+    <input type="text" name="todo" value="">
+  </div>
+  <div>
+    <label>Notes</label>
+    <textarea name="notes"></textarea>
+  </div>
+  <div>
+    <input type="submit" value="Add Todo">
+  </div>
+</form>
 {{end}}

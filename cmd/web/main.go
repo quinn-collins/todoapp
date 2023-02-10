@@ -32,12 +32,24 @@ func home(w http.ResponseWriter, r *http.Request) {
 }
 
 func addtodo(w http.ResponseWriter, r *http.Request) {
-  w.Write([]byte("Add todo form..."))
+  err := r.ParseForm()
+  if err != nil {
+    http.Error(w, "Form bad...", http.StatusBadRequest)
+  }
+  todo := r.PostForm.Get("todo")
+  notes := r.PostForm.Get("notes")
+  w.Write([]byte(todo + notes))
+  http.Redirect(w, r, "/", 200)
 }
 
 func main() {
+  fileServer := http.FileServer(http.Dir("./ui/static/"))
   mux := http.NewServeMux()
+
+  mux.Handle("/static/", http.StripPrefix("/static", fileServer))
+
   mux.HandleFunc("/", home)
   mux.HandleFunc("/todo/add", addtodo)
+
   http.ListenAndServe(":4000", mux)
 }
